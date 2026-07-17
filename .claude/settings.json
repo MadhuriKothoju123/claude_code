@@ -18,8 +18,7 @@
       "Bash(rm -rf*)",
       "Bash(sudo*)",
       "Bash(npm publish*)",
-      "Edit(server/.env)",
-      "Edit(client/.env)",
+      "Edit(.env)",
       "Read(./.env.*)",
       "Read(./secrets/**)"
     ]
@@ -32,6 +31,15 @@
           {
             "type": "command",
             "command": "node .claude/hooks/audit-log.js"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/check-test-file.sh"
           }
         ]
       }

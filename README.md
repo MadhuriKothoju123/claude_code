@@ -1,20 +1,16 @@
 # my-app
 
-Express (TypeScript) API + React (TypeScript, Vite) frontend, wired together
-as an npm workspaces monorepo, pre-configured for Claude Code.
+React (TypeScript, Vite) frontend, wired up as an npm workspaces monorepo,
+pre-configured for Claude Code.
 
 ## Quick start
 
 ```bash
 npm install
-cp server/.env.example server/.env
 npm run dev
 ```
 
-This starts the Express API on `http://localhost:4000` and the Vite dev
-server on `http://localhost:5173` together. The client proxies `/api/*`
-requests to the server in dev, so open `http://localhost:5173` and you
-should see a page reading the server's `/api/health` endpoint.
+This starts the Vite dev server on `http://localhost:5173`.
 
 ## Project layout
 
@@ -22,23 +18,16 @@ should see a page reading the server's `/api/health` endpoint.
 my-app/
 ├── CLAUDE.md              # instructions for Claude Code
 ├── .claude/settings.json  # permissions Claude Code operates under
-├── server/                # Express API (TypeScript, ESM)
-│   └── src/
-│       ├── index.ts       # entry point
-│       ├── app.ts         # express app + middleware
-│       ├── routes/        # one file per resource
-│       └── config/        # env parsing
-└── client/                # React app (Vite + TypeScript)
-    └── src/
+└── src/                   # React app (Vite + TypeScript)
 ```
 
 ## Scripts (run from repo root)
 
 | Command | What it does |
 |---|---|
-| `npm run dev` | Run server + client together, watch mode |
-| `npm run build` | Type-check and build both workspaces |
-| `npm run lint` | Lint both workspaces |
+| `npm run dev` | Run the client, watch mode |
+| `npm run build` | Type-check and build the client |
+| `npm run lint` | Lint the client |
 | `npm run type-check` | TypeScript check only |
 | `npm run verify` | type-check + lint + test + build — run before considering any change done |
 
