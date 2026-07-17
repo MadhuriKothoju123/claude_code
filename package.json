@@ -1,0 +1,24 @@
+{
+  "name": "my-app",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Express + React (TypeScript) monorepo",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "install:all": "npm install",
+    "dev": "concurrently -n server,client -c blue,green \"npm run dev -w server\" \"npm run dev -w client\"",
+    "dev:server": "npm run dev -w server",
+    "dev:client": "npm run dev -w client",
+    "build": "npm run build -w server && npm run build -w client",
+    "lint": "npm run lint -w server && npm run lint -w client",
+    "type-check": "npm run type-check -w server && npm run type-check -w client",
+    "test": "npm run test -w server && npm run test -w client",
+    "verify": "npm run type-check && npm run lint && npm run test && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

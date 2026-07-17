@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev*)",
+      "Bash(npm run build*)",
+      "Bash(npm run lint*)",
+      "Bash(npm run test*)",
+      "Bash(npm run type-check*)",
+      "Bash(npm run verify*)",
+      "Bash(npm install)",
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep"
+    ],
+    "deny": [
+      "Bash(rm -rf*)",
+      "Bash(sudo*)",
+      "Bash(npm publish*)",
+      "Edit(server/.env)",
+      "Edit(client/.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/audit-log.js"
+          }
+        ]
+      }
+    ]
+  }
+}
