@@ -23,25 +23,22 @@ This repo is `MadhuriKothoju123/claude_code` on GitHub, default branch
 Don't review against generic best practices alone — check the diff against
 what this repo actually requires:
 
-- Root [CLAUDE.md](../../../CLAUDE.md) — strict TypeScript (no loosening
-  it), `npm run verify` (type-check + lint + test + build) as the bar for
-  "done", server/client workspace boundaries.
-- [client/CLAUDE.md](../../../client/CLAUDE.md) — function components and
-  hooks only (no classes); the folder-per-item structure
-  (`components/<Name>/<Name>.tsx` + `.test.tsx` + `index.ts`, same for
-  `pages/`; flat `use<Thing>.ts` + `.test.ts` for `hooks/` and `utils/`);
-  every new component/page/hook/util needs a co-located matching test file.
-  A `PostToolUse` hook (`check-test-file.sh`) already nudges about this
-  locally, but PRs can still arrive without it if opened from elsewhere —
-  check for it explicitly.
-- The `react-mui-component` skill's rules, for any file under
-  `client/src/components/**` or `client/src/pages/**`: MUI components only
-  (no bare HTML for UI, no second UI library), no inline `style={{...}}` or
+- [CLAUDE.md](../../../CLAUDE.md) — strict TypeScript (no loosening it),
+  function components and hooks only (no classes), `npm run verify`
+  (type-check + lint + test + build) as the bar for "done", and the
+  folder-per-item structure (`components/<Name>/<Name>.tsx` + `.test.tsx` +
+  `index.ts`, same shape for `pages/` and `routes/`; flat `use<Thing>.ts` +
+  `.test.ts` for `hooks/` and `utils/`). Every new component/page/hook/
+  router/util needs a co-located matching test file. A `PostToolUse` hook
+  (`check-test-file.sh`) already nudges about this locally, but PRs can
+  still arrive without it if opened from elsewhere — check for it
+  explicitly.
+- If the diff touches `src/components/**` or `src/pages/**`, invoke the
+  `react-mui-component` skill (via the `Skill` tool) to load its full
+  checklist and check the diff against it: MUI components only (no bare
+  HTML for UI, no second UI library), no inline `style={{...}}` or
   `.module.css`/`.css` files (use `sx`/`styled()`), explicit `Props`
   interface per component, ~150 lines per file, one component per file.
-- If the diff touches anything outside `client/`, apply root `CLAUDE.md`'s
-  rules instead (server/Express conventions, `server/src/routes/` one file
-  per resource, etc.) rather than the client-specific ones above.
 
 Read the actually-changed files locally (`Read`/`Grep`) when the diff alone
 doesn't give enough context — e.g. to confirm a helper it calls doesn't
