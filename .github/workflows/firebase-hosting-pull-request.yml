@@ -1,6 +1,7 @@
 name: Deploy to Firebase Hosting on PR
-on: pull_request
-branches: [master]
+on:
+  pull_request:
+    branches: [master]
 permissions:
   checks: write
   contents: read
