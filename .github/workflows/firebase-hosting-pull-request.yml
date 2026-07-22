@@ -26,6 +26,10 @@ jobs:
   claude_review:
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,9 +37,17 @@ jobs:
       - uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          use_sticky_comment: true
           prompt: |
             Review the changes in this PR against our CLAUDE.md standards.
             Check for security vulnerabilities, missing tests, architecture
-            violations, performance issues, and documentation gaps And Also use pr-reviewer subagent for coding standards
-            Post your findings as inline comments on the relevant lines.
-          claude_args: "--max-turns 20"
+            violations, performance issues, and documentation gaps. Also use
+            the pr-reviewer subagent for coding standards checks.
+            You MUST post your findings as inline comments on the relevant
+            lines using the inline comment tool, and post a short summary
+            comment at the end. Do not just analyze — actually post the
+            comments. If nothing actionable is found, post a summary comment
+            that says so.
+          claude_args: >-
+            --max-turns 20
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
