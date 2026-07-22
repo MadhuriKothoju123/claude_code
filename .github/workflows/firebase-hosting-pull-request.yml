@@ -1,5 +1,6 @@
 name: Deploy to Firebase Hosting on PR
 on: pull_request
+branches: [master]
 permissions:
   checks: write
   contents: read
@@ -34,6 +35,6 @@ jobs:
           prompt: |
             Review the changes in this PR against our CLAUDE.md standards.
             Check for security vulnerabilities, missing tests, architecture
-            violations, performance issues, and documentation gaps.
+            violations, performance issues, and documentation gaps And Also use pr-reviewer subagent for coding standards
             Post your findings as inline comments on the relevant lines.
           claude_args: "--max-turns 20"
