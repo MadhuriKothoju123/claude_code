@@ -8,7 +8,7 @@ function HomePage() {
           my-app
         </Typography>
         <Typography variant="body1" color="text.secondary">
-          Frontend scaffold — no backend wired up yet.
+          CICD INTEGRTION
         </Typography>
       </Paper>
     </Box>
