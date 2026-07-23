@@ -43,8 +43,11 @@ jobs:
           prompt: |
             Review the changes in this PR against our CLAUDE.md standards.
             Check for security vulnerabilities, missing tests, architecture
-            violations, performance issues, and documentation gaps. Also use
-            the pr-reviewer subagent for coding standards checks.
+            violations, performance issues, and documentation gaps. In
+            particular, this project is MUI-only: components/pages must use
+            MUI components (Box, Typography, etc.) and the `sx` prop or
+            `styled()`, never raw HTML elements or inline `style={{}}`
+            attributes — flag any violation of that.
             You MUST post your findings as inline comments on the relevant
             lines using the inline comment tool, and post a short summary
             comment at the end. Do not just analyze — actually post the
